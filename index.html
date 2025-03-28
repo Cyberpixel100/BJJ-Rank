@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Alunos</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Manifest e Service Worker para transformar em Web App -->
+    <link rel="manifest" href="manifest.json">
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js');
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Cadastro de Aluno</h2>
+        <form id="alunoForm">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" required>
+
+            <label for="sexo">Sexo:</label>
+            <select id="sexo" required>
+                <option value="" disabled selected>Selecionar</option>
+                <option value="Masculino">Masculino</option>
+                <option value="Feminino">Feminino</option>
+            </select>
+
+            <label for="equipe">Equipe:</label>
+            <input type="text" id="equipe" required>
+
+            <label for="anoNascimento">Ano de Nascimento:</label>
+            <input type="number" id="anoNascimento" required>
+
+            <label for="peso">Peso (kg):</label>
+            <input type="number" id="peso" step="0.1" required>
+
+            <label for="faixa">Faixa:</label>
+            <select id="faixa" required>
+                <option value="" disabled selected>Selecionar</option>
+                <option value="Cinza">Cinza</option>
+                <option value="Amarelo">Amarelo</option>
+                <option value="Laranja">Laranja</option>
+                <option value="Verde">Verde</option>
+                <option value="Branca">Branca</option>
+                <option value="Azul">Azul</option>
+                <option value="Roxa">Roxa</option>
+                <option value="Marrom">Marrom</option>
+                <option value="Preta">Preta</option>
+            </select>
+
+            <button type="submit">Cadastrar</button>
+        </form>
+
+        <h2>Lista de Alunos</h2>
+        <div id="listaAlunos"></div>
+
+        <h2>Checagem de Categorias</h2>
+        <div class="filtro">
+            <select id="filtroSexo">
+                <option disabled selected>Selecionar Sexo</option>
+                <option value="Masculino">Masculino</option>
+                <option value="Feminino">Feminino</option>
+            </select>
+            <button onclick="filtrarCategorias()">Pesquisar</button>
+        </div>
+
+        <div id="categorias"></div>
+
+        <!-- Botão para imprimir categorias -->
+        <button onclick="imprimirCategorias()" id="imprimirBtn" style="margin-top: 15px; padding: 10px;">
+            🖨️ Imprimir Categorias
+        </button>
+    </div>
+
+    <!-- Modal do Perfil do Aluno -->
+    <div id="perfilModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close" onclick="fecharModal()">❌ Fechar</span>
+            <h3 id="perfilNome"></h3>
+            <p><strong>Sexo:</strong> <span id="perfilSexo"></span></p>
+            <p><strong>Equipe:</strong> <span id="perfilEquipe"></span></p>
+            <p><strong>Idade:</strong> <span id="perfilIdade"></span></p>
+            <p><strong>Peso:</strong> <span id="perfilPeso"></span> kg</p>
+            <p><strong>Faixa:</strong> <span id="perfilFaixa"></span></p>
+            <p><strong>Categoria de Idade:</strong> <span id="perfilCategoriaIdade"></span></p>
+            <p><strong>Categoria de Peso:</strong> <span id="perfilCategoriaPeso"></span></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
